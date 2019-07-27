@@ -39,5 +39,15 @@ def metacritic_score
 	@metacritic_score = @movie.css('div.metacriticScore').text.strip.to_i
 end
 
+# Returns an array
+def director
+	director_glob = @movie.css('div.plot_summary div.credit_summary_item')[0].text.gsub("\n", '')
+	if director_glob.include?('Directors:')
+		@director = director_glob.gsub('Directors:', '').strip.split(',').map{|dir| dir.split('(').first.strip}
+	else
+		@director = [director_glob.split('Director').last.strip.gsub(':', '')]
+	end
+end
+
 # https://www.imdb.com/find?ref_=nv_sr_fn&q=evil+dead&s=tt
 # https://www.imdb.com/title/tt0083907/
