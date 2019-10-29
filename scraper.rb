@@ -10,6 +10,7 @@ def set_movie_data(movie_title)
 	title
 	director
 	stars
+	poster_url
 end
 
 # Searches movie title and opens movie page in Nokogiri
@@ -60,6 +61,11 @@ end
 def stars
 	@stars = @movie.css('div.plot_summary div.credit_summary_item').last.text.gsub("\n", '')
 		.split('|').first.strip.gsub('Stars:', '').split(',').map{|star| star.strip}
+end
+
+# Sets poster url
+def poster_url
+	@poster_url = @movie.css('div.poster img').attribute('src').value
 end
 
 # https://www.imdb.com/find?ref_=nv_sr_fn&q=evil+dead&s=tt
