@@ -63,7 +63,7 @@ def stars
 		.split('|').first.strip.gsub('Stars:', '').split(',').map{|star| star.strip}
 end
 
-# Sets poster url
+# Sets poster url 
 def poster_url
 	@poster_url = @movie.css('div.poster img').attribute('src').value
 end
